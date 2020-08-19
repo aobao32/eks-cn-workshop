@@ -135,20 +135,19 @@ alb-ingress-controller-6494895bbf-njfcl   1/1     Running   0          6s
 
 ## 二、部署使用ALB Ingress的测试应用
 
-
 ### 1、创建测试应用
 
-执行如下命令，使用上一步创建的ALB Ingress部署测试应用。
+执行如下命令，使用上一步创建的ALB Ingress部署测试应用。这一个Ngnix应用与上一个实验的Nginx的区别是，采用Cluster IP + ALB Ingress的网络方式对外暴露应用。
 
 ```
 kubectl apply -f https://s3.cn-north-1.amazonaws.com.cn/myworkshop-lxy/eksworkshop/nginx-alb-ingress.yaml
 ```
 
-创建完成。
+由此将在Default namespace下创建出来nginx应用。
 
 ### 2、测试访问ALB
 
-执行如下命令获取ALB Ingress的地址。
+执行如下命令获取ALB Ingress的地址。命令后边没有加 -n 的参数表示是在default namespace，如果是在其他name space下需要使用 -n namespace名字 的方式声明要查询的命名空间。
 
 ```
 kubectl get ingress
