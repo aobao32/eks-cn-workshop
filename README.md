@@ -25,6 +25,6 @@
 
 结合AWS EKS ECR Workshop内容：
 
-[https://github.com/aws-samples/eks-workshop-greater-china]()
+[https://github.com/aws-samples/eks-workshop-greater-china](https://github.com/aws-samples/eks-workshop-greater-china)
 
 对脚本做了适应中国区的调整，且组合了部分脚本，降低实验参与者对Linux Shell的技术背景和难度，简化操作过程。
