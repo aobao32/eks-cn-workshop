@@ -7,7 +7,7 @@
 实验需求：
 
 * MacOS，带包括 awscli，eksctl，kubectl等环境
-* Linux Shell环境经验
+* 如果客户端环境不是MacOS，建议在AWS上创建一个EC2使用Amazon Linux 2系统，并通过此EC2进行后续操作
 
 ## 二、实验内容
 
@@ -17,9 +17,9 @@
 
 [实验3：调整集群配置](https://github.com/aobao32/eks-cn-workshop/blob/master/03-%E8%B0%83%E6%95%B4%E9%9B%86%E7%BE%A4%E9%85%8D%E7%BD%AE.md)
 
-实验4：部署单体应用2048游戏
+[实验4：部署单体应用2048游戏](https://github.com/aobao32/eks-cn-workshop/blob/master/04-%E9%83%A8%E7%BD%B2%E5%8D%95%E4%BD%93%E5%BA%94%E7%94%A82048%E6%B8%B8%E6%88%8F.md)
 
-实验5：部署微服务应用
+[实验5：部署微服务应用](https://github.com/aobao32/eks-cn-workshop/blob/master/05-%E9%83%A8%E7%BD%B2%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%BA%94%E7%94%A8.md)
 
 ## 三、参考资料
 
