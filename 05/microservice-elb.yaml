@@ -1,13 +1,7 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: "microservice"
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ecsdemo-crystal
-  namespace: microservice
   labels:
     app: ecsdemo-crystal
 spec:
@@ -27,7 +21,7 @@ spec:
     spec:
       containers:
       - image: brentley/ecsdemo-crystal:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: ecsdemo-crystal
         ports:
         - containerPort: 3000
@@ -37,10 +31,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ecsdemo-crystal
-  namespace: microservice
 spec:
   selector:
     app: ecsdemo-crystal
+  type: ClusterIP  
   ports:
    -  protocol: TCP
       port: 80
@@ -50,7 +44,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ecsdemo-nodejs
-  namespace: microservice
   labels:
     app: ecsdemo-nodejs
 spec:
@@ -70,7 +63,7 @@ spec:
     spec:
       containers:
       - image: brentley/ecsdemo-nodejs:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: ecsdemo-nodejs
         ports:
         - containerPort: 3000
@@ -80,10 +73,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ecsdemo-nodejs
-  namespace: microservice
 spec:
   selector:
     app: ecsdemo-nodejs
+  type: ClusterIP
   ports:
    -  protocol: TCP
       port: 80
@@ -93,7 +86,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ecsdemo-frontend
-  namespace: microservice
   labels:
     app: ecsdemo-frontend
 spec:
@@ -113,7 +105,7 @@ spec:
     spec:
       containers:
       - image: brentley/ecsdemo-frontend:latest
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: ecsdemo-frontend
         ports:
         - containerPort: 3000
@@ -127,8 +119,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: ecsdemo-frontend-clusterip
-  namespace: microservice
+  name: ecsdemo-frontend
 spec:
   selector:
       app: ecsdemo-frontend
@@ -136,24 +127,23 @@ spec:
   ports:
    -  protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 3000
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ecsdemo-frontend
-  namespace: microservice
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
   labels:
-    app: microservice
+    app: microservice-ingress
 spec:
   rules:
     - http:
         paths:
           - path: /*
             backend:
-              serviceName: "ecsdemo-frontend-clusterip"
+              serviceName: "ecsdemo-frontend"
               servicePort: 80
